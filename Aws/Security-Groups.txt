@@ -1,0 +1,11 @@
+SECURITY GROUPS
+
+1.SSh-43,HTTP-80,CUSTOM TCP-application port number   (For basic spring app using ec2 & s3)
+
+2.All traffic(anywhere),All traffic(security-group id)  (For rds)
+
+3.CUSTOM TCP-application port number  (ECS)
+  All traffic(anywhere),All traffic(security-group id),Mysql Aurora-Ip address,Mysql Aurora-ECS-security-group-id (For ECS & RDS)
+
+4.SSh-43,HTTP-80,CUSTOM TCP-application port number,CUSTOM TCP-(Loadbalancer-security-group-id)
+  HTTP-80 (For Loadbalancer)

@@ -1,0 +1,10 @@
+cloud:
+  aws:
+    region:
+      static: us-east-2
+      auto: false
+    credentials:
+      access-key: AKIA3HFKNUBRDFHH2BST
+      secret-key: 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
+    end-point:
+      uri: dynamodb.us-east-2.amazonaws.com

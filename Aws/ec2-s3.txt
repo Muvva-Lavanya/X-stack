@@ -1,0 +1,23 @@
+1.Deploying spring application using EC2&S3
+
+sudo yum install
+sudo yum install java
+java --version
+sudo yum install sql
+wget (url from s3)
+java -jar Filename.jar
+
+S3-bucket versioning policy
+
+Bucket-Versioning Policy
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::your-bucket-name/*"
+        }
+    ]
+}

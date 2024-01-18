@@ -1,0 +1,16 @@
+IAM roles
+
+1.IAM roles for ec2,s3 code pipeline-deployement
+	1. AmazonEC2RoleforAWSCodeDeploy
+	2. AmazonS3FullAccess
+	
+2.IAM roles for EBS code pipeline-deployement
+	1. AWSElasticBeanstalkWebTier 
+	2. AWSElasticBeanstalkMulticontainerDocker 
+	3. AWSElasticBeanstalkWorkerTier
+	
+3. IAM roles for DynamoDb
+	1. DynamoDbFullAccess
+
+4. IAM roles for SQS
+	1. SQSFullAccess

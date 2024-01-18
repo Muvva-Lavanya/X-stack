@@ -1,0 +1,3 @@
+The New Home for Spring Cloud AWS
+
+https://github.com/awspring/spring-cloud-aws
