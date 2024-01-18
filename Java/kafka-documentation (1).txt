@@ -1,0 +1,206 @@
+Apache Kafka core Terminologies
+1.kafka broker
+2.producer
+3.consumer
+4.kafka topic
+5.kafka partitions
+6.offset
+7.consumer group
+
+producer ---> kafka broker -----> consumer
+
+to start the zookeeper service below step to be followed.
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+before executing this command we need to make sure that we're in right folder.
+----------
+
+to start the kafka-server-start below step to be followed.
+.\bin\windows\kafka-server-start.bat .\bat\config\server.properties
+
+---------
+to create a kafka topic in kafka server
+.\bin\windows\kafka-topic.bat --create --topic <topic-name> --bootstrap-server localhost:9092
+
+before executing above step we need to make sure to be in kafka folder and zookeeper and kafka broker should be running.
+----------
+.\bin\windows\kafka-console-producer.bat --topic <topic-name> --bootstrap-server localhost:9092
+
+to write events we will get to use above statement.after eecuting it will get generate a shell to accept data over it.
+this is an kafka producer which produce data for mentioned topic <topic-name>
+and next will create a consumer to accept this events of a mentioned topic. to get this data consumer should subscribe
+the topic so he can get the data. next step to generate kafka consumer.
+to exit from shell Ctrl+c.
+---------
+.\bin\windows\kafka-console-consumer.bat --topic <topic-name> --bootstrap-server localhost:9092
+
+this is for creating a consumer.
+Note if you map this producer and consumer at a time in different command prompt so what ever data we given will display on consumer. but right now there is on property which if you work on one command promprt after working with 
+producer we will get exited right. to get all those details perviously inserted.
+the command is:
+.\bin\windows\kafka-console-consumer.bat --topic <topic-name> --from-beginning --bootstrap-server localhost:9092
+
+integrating to spring boot for intellij
+
+depenedences:
+spring for Apache Kafka (messaging)
+
+configure kafka producer and consumer
+spring apache kafka documentation(reference how without boot what need to be configured.)
+
+after creating a project with aboce depenedences we need to mention some properties to configure producer and consumer:
+
+for consumer:
+
+spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+spring.kafka.consumer.value-deserializer=org.springframework.kafka.support.serializer.JsonDeserializer
+spring.kafka.consumer.group-id=notification
+spring.kafka.consumer.auto-offset-reset=earliest
+spring.kafka.consumer.properties.spring.json.trusted.packages=*
+
+for producer:
+
+spring.kafka.producer.bootstrap-servers=localhost:9092
+spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer
+spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer
+next step creation of topic:
+---------------------------------------
+
+create a class and annotate it as @Configuration as mentioned below and follow all steps 
+
+NewTopic is from org.apache.kafka...
+TopicBuilder is from org.springframework.kafka..
+
+packages 
+
+@Configuration
+public class KafkaTopicConfig {
+	
+	@Bean
+	public NewTopic firstTopic() {
+		return TopicBuilder.name("topic-name")
+				.build();
+	}
+	
+}	
+
+create kafka producer
+----------------------------------
+
+KafkaTemplate from(org.springframework) it will help to interact with kafka broker.
+
+the below class will help you to understand about how to create KafkaProducer.
+
+KafkaTemplate is from (org.springframework...) 
+
+@Service
+public class KafkaProducer {
+
+	@Autowired
+	private KafkaTemplate<String,String> kafkaTemplate;
+	
+	public void sendMenssage(String messsage) {
+		kafkaTemplate.send("topic-name",message);
+	}
+}
+
+create one rest end point to access this service class and want to sent event to kafka broker
+
+after sending messages/events to see them from consumer point of view below command can be followed.
+
+.\bin\windows\kafka-console-consumer.bat --topic <topic-name> --from-beginning --bootstrap-server localhost:9092
+
+
+create kafka consumer
+-------------------------
+
+@Sl4j
+@Serrvice
+public class KafkaConsumer {
+
+	@KafkaListener(topics = "topic-name", groupId = "group-name") this annotation is from org.spingframework...
+	public void consume(String message) {
+		log.info("message {}: ",message);
+	}
+}
+
+above message/event of type string. now we will go to json format.
+
+Apache kafka stores and transports byte[]. there are a number of built in serializers and deserializers
+but it doesn't include any for json. Therefore, spring kafka created a JsonSerializer and JsonDeSerializer
+which can convert Json object to java object and java object to json.
+
+so we need change application.properties file from StringSerialzer and StringDeserialzer to JsonSerializer and JsonDeSerializer
+
+spring.kafka.consumer.key-deserializer: org.apache.kafka.common.serialization.StringDeserialzer (no change for message key)
+spring.kafka.consumer-value-deserializer: org.spingframework.kafka.support.serializer.JsonDeSerializer
+spring.kafka.consumer.properties.spring.json.trusted.packages=*
+ 
+spring.kafka.producer.key-serializer: org.apache.common.serialization.StringSerialzer (no change for message key)
+spring.kafka.producer.value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+
+creating a pojo class to seralize and deserialize (JsonSerializer and JsonDeSerializer) \
+for tranfering in between broker to producer and consumer
+----------------------------------------------
+create a model class to be used to transfer data in between producer and consumer.
+
+next kafka producer and kafka consumer creation
+
+KafkaTemplate is from org.apache.kafka package
+
+Message and MessageBuilder is from org.springframework package
+
+this is producer for json topic.
+---------------------------------------
+
+@Service
+public class JsonKafkaProducer {
+
+	@Autowired
+	private KafkaTemplate<String,User> kafkaTemplate;
+	
+	public void sendMessage(Use data) {
+	
+		Message<User> message = MessageBuilder.withPayload(user)
+										.setHeader(KafkaHeaders.TOPIC,"topic-nameof type-json")
+										.build();
+		kafkaTemplate.send(message);
+	}
+}
+
+next creating a rest end point for sending a json object to kafka broker 
+then kafka broker will send to kafka consumer.
+
+create a new Bean for json topic ojects
+-----------------------------------------
+
+@Configuration
+public class KafkaTopicConfig {
+	
+	@Bean
+	public NewTopic firstTopic() {
+		return TopicBuilder.name("topic-name")
+				.build();
+	}
+	
+	@Bean
+	public NewTopic firstTopicJson() {
+		return TopicBuilder.name("topic-name-of-type-json")
+				.build();
+	}
+	
+}	
+
+this is consumer for json topics.
+-----------------------------------------
+
+@Sl4j
+@Serrvice
+public class JsonKafkaConsumer {
+
+	@KafkaListener(topics = "topic-name-of-type-json", groupId = "group-name") this annotation is from org.spingframework...
+	public void consume(User user) {
+		log.info("message {}: ",message);
+	}
+}

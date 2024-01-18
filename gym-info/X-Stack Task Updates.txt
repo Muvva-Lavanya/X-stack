@@ -1,0 +1,11 @@
+1. 7th API - While deleting the trainee, entire data and every relation related to trainee should be deleted including training table(Mongo logs should be excluded).
+
+2. 11th API - While updating the trainee's trainers list, the data need to be overwritten.
+
+3. 2nd API - While registering trainer, he can only select the available Specialization, no new specialization can be added.
+
+4. 14th API - While adding training, sending training type as a parameter is not required, we can fetch it from the trainer data.
+
+5. Get Controller should be written for training type entity for the sake of Front End.
+
+6. Specialization should be inserted into the training type table directly from MySQL.
