@@ -1,0 +1,15 @@
+<div class="header">
+  <mat-toolbar>
+    <button class="example-icon" mat-icon-button>
+      <mat-icon>fitness_center</mat-icon>
+    </button>
+    <span>GYM-PORTAL</span>
+    <span class="spacer"></span>
+    <div class="menu-items">
+      <button mat-raised-button routerLink="/home" routerLinkActive="active">Home</button>&nbsp;&nbsp;&nbsp;
+      <button mat-raised-button routerLink="/home/join-us" routerLinkActive="active">Join Us</button>&nbsp;&nbsp;&nbsp;
+      <button mat-raised-button routerLink="/home/signIn" routerLinkActive="active">Sign In</button>
+    </div>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+</div>

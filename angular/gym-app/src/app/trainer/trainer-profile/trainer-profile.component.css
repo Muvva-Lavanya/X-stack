@@ -1,0 +1,184 @@
+.menu-items button {
+  background-color: white;
+  color: black;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  background-color: #d6e9f1;
+  color: black;
+}
+
+.mat-mdc-table {
+  width: fit-content;
+  max-height: 500px;
+  overflow: auto;
+
+}
+
+.mat-column-name {
+  height: 100px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0px;
+  margin-left: 0px;
+
+}
+
+.my-account {
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 40px;
+
+}
+
+.student-profile {
+  flex-direction: row;
+  display: flex;
+  flex: 4;
+  margin-top: 50px;
+  margin-left: 40px;
+  margin-bottom: 5%;
+  gap: 400px;
+}
+
+.student-profile button {
+  background-color: #d6e9f1;
+  color: black;
+}
+
+.Trainer
+.my-trainings {
+  padding-left: 12%;
+  padding-right: 12%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 2;
+
+}
+
+.pfp-status {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 3%;
+  /*gap: 25px;*/
+}
+
+.student-status {
+  margin-left: 25px;
+}
+
+.student-status h4 {
+  margin-bottom: 1px;
+}
+
+.student-status h5 {
+  color: forestgreen;
+}
+
+.my-account, .my-profile, .my-trainees {
+  display: flex;
+  flex: 1;
+}
+
+.my-profile {
+  flex-direction: column;
+  flex: 1;
+  align-items: flex-start;
+  margin-left: 5%;
+}
+
+h3 {
+  /*font-weight: bold;*/
+  color: grey;
+  margin-bottom: 1px;
+}
+
+h1, h4, h2 {
+  font-weight: bold;
+  color: black;
+}
+
+.my-trainers {
+  margin-left: 150px;
+}
+
+.my-trainers-header {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.my-trainers-header h3 {
+  margin-right: 45px;
+}
+
+
+.my-trainings button {
+  width: 150px;
+  height: 42px;
+}
+
+.my-trainers-header button {
+  margin-left: 150px;
+}
+
+.my-trainers-header h3 {
+  font-weight: bold;
+  color: black;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  width: 50%;
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+th {
+  background-color: #d6e9f1;
+}
+
+td + td {
+  border-left: 1px solid #ccc;
+}
+
+.trainers-table {
+  margin-left: 0px;
+  width: 160%;
+
+}
+
+.my-trainings p {
+  margin-bottom: 50px;
+}
+
+.delete-profile button {
+  transform: translate(300%, 350%);
+}
+
+
+
+
+
+
+
+
+
+
+

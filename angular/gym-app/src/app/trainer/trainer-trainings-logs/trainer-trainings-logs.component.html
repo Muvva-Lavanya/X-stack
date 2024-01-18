@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="header">
+    <mat-toolbar>
+      <button class="example-icon" mat-icon-button>
+        <mat-icon>fitness_center</mat-icon>
+      </button>
+      <span>GYM-PORTAL</span>
+      <span class="spacer"></span>
+      <button (click)="backToProfile()" class="example-icon" mat-icon-button>
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <span>{{trainerProfile.userName}}</span>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </div>
+  <div class="search-feilds">
+    <form (ngSubmit)="onSubmit()" [formGroup]="trainerTrainingsForm">
+
+      <mat-form-field>
+        <mat-icon class="my-icon" matPrefix>fitness_center</mat-icon>
+        <mat-label>please select trainee</mat-label>
+        <mat-select formControlName="traineeName" id="traineeName">
+          <mat-option *ngFor="let trainee of traineeList" [value]="trainee.userName">
+            {{trainee.firstName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-slide-toggle class="toggle" formControlName="traineeToggle"></mat-slide-toggle>&nbsp;&nbsp;&nbsp;
+
+
+      <mat-form-field>
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker" formGroupName="range">
+          <input formControlName="start" matStartDate placeholder="Start date">
+          <input formControlName="end" matEndDate placeholder="End date">
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle [for]="picker" matIconSuffix></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+      <mat-slide-toggle class="toggle" formControlName="dateToggle"></mat-slide-toggle>&nbsp;&nbsp;&nbsp;
+
+
+      <button color="primary" mat-raised-button type="submit">search</button>
+    </form>
+  </div>
+
+
+  <!--  <div *ngIf="trainingData.length>0">-->
+  <div class="table-container">
+    <h2 class="mat-h2">Training Data of Trainee</h2>
+    <table [dataSource]="trainingData" class="mat-elevation-z8" mat-table>
+      <ng-container matColumnDef="traineeUserName">
+        <th *matHeaderCellDef mat-header-cell> Trainee Name</th>
+        <td *matCellDef="let element" mat-cell> {{ element.traineeName }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="trainerUsername">
+        <th *matHeaderCellDef mat-header-cell> Trainer Name</th>
+        <td *matCellDef="let element" mat-cell> {{ element.trainerName }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="trainingDate">
+        <th *matHeaderCellDef mat-header-cell> Training Date</th>
+        <td *matCellDef="let element" mat-cell> {{ element.trainingDate | date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="trainingDuration">
+        <th *matHeaderCellDef mat-header-cell> Training Duration</th>
+        <td *matCellDef="let element" mat-cell> {{ element.trainingDuration }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="trainingName">
+        <th *matHeaderCellDef mat-header-cell> Training Name</th>
+        <td *matCellDef="let element" mat-cell> {{ element.trainingName }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="trainingType">
+        <th *matHeaderCellDef mat-header-cell>Training Type</th>
+        <td *matCellDef="let element" mat-cell> {{ element.trainingType }} </td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+    </table>
+  </div>
+</div>

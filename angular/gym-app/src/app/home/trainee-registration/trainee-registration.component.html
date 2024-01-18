@@ -1,0 +1,78 @@
+<app-homepage></app-homepage>
+<div class="container">
+  <div class="header">
+    <h1>Registration</h1>
+    <h3>Trainee</h3>
+  </div>
+  <div class="body">
+    <div class="image">
+      <img alt="Student Registration Image" src="../../../assets/images/trainee-sign-up.png">
+    </div>
+    <div class="registration-form">
+      <form (ngSubmit)="onSubmit()" [formGroup]="registrationForm">
+        <mat-form-field>
+          <mat-icon class="my-icon" matPrefix>perm_identity</mat-icon>
+          <mat-label>Enter Firstname</mat-label>
+          <input formControlName="firstName" id="firstName" matInput name="firstName">
+          <mat-error *ngIf="registrationForm.get('firstName').hasError('required')">
+            FirstName is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="registrationForm.get('firstName').hasError('pattern')">
+            FirstName should only contain [a-z],[A-Z]
+          </mat-error>
+          <mat-error *ngIf="registrationForm.get('firstName').hasError('minlength')">
+            Firstname should contain atleast 3 characters.
+          </mat-error>
+          <mat-error *ngIf="registrationForm.get('firstName').hasError('maxlength')">
+            Firstname should not contain more than 15 characters.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-icon class="my-icon" matPrefix>perm_identity</mat-icon>
+          <mat-label>Enter Lastname</mat-label>
+          <input formControlName="lastName" id="lastName" matInput name="lastName">
+          <mat-error *ngIf="registrationForm.get('lastName').hasError('required')">
+            Lastname is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="registrationForm.get('lastName').hasError('pattern')">
+            LastName should only contain [a-z],[A-Z]
+          </mat-error>
+          <mat-error *ngIf="registrationForm.get('lastName').hasError('minlength')">
+            Lastname should contain atleast 3 characters.
+          </mat-error>
+          <mat-error *ngIf="registrationForm.get('lastName').hasError('maxlength')">
+            Lastname should not contain more than 15 characters.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Date of Birth (optional)</mat-label>
+          <input [matDatepicker]="datePicker" formControlName="dateOfBirth" id="dateOfBirth" matInput
+                 name="dateOfBirth">
+          <mat-datepicker-toggle [for]="datePicker" matSuffix></mat-datepicker-toggle>
+          <mat-datepicker #datePicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-icon class="my-icon" matPrefix>home</mat-icon>
+          <mat-label>Enter your full address</mat-label>
+          <textarea Name="address" formControlName="address" id="address" matInput></textarea>
+          <mat-error *ngIf="registrationForm.get('address').hasError('required')">
+            Address is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-icon class="my-icon" matPrefix>email</mat-icon>
+          <mat-label>Enter Email</mat-label>
+          <input formControlName="email" id="email" matInput name="email">
+          <mat-error *ngIf="registrationForm.get('email').hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="registrationForm.get('email').hasError('pattern')">
+            Email should be in the form of abc@gmail.com
+          </mat-error>
+        </mat-form-field>
+        <button [disabled]="registrationForm.invalid" mat-raised-button type="submit">Submit</button>
+
+      </form>
+    </div>
+  </div>
+</div>

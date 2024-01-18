@@ -1,0 +1,104 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0px;
+}
+
+.header {
+  text-align: -moz-left;
+  margin-bottom: 20px;
+  margin-top: 50px;
+  margin-left: 400px;
+}
+
+h1 {
+  font-weight: bold;
+  color: black;
+  margin-bottom: 10px;
+  /*margin: 0; !* Remove the default margin *!*/
+}
+
+h3 {
+  font-weight: lighter;
+  color: grey;
+  margin: 0; /* Remove the default margin */
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.image img {
+  margin-left: 200px;
+  margin-right: 50px;
+  width: 600px; /* Set the width and height to the same value to create a square */
+  height: 430px;
+  object-fit: contain;
+}
+
+.registration-form {
+  margin-top: 15px;
+  width: 30px; /* Adjust the width as needed */
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.registration-form mat-form-field {
+  width: 160%;
+  height: 70px;
+  color: blueviolet;
+  text-align: center;
+}
+
+.registration-form mat-icon {
+  color: #a5d8ee;
+}
+
+
+/* Optional: Style the button */
+.registration-form Button {
+  background-color: #d6e9f1;
+  color: black;
+  margin-top: 10px;
+  flex-grow: 1;
+  width: 160%; /* Expand to fill available horizontal space */
+
+}
+
+/* Decrease the font size inside mat-form-field */
+mat-form-field {
+  font-size: 14px; /* Adjust the font size as needed */
+  height: 60px;
+}
+
+/* Decrease the font size of the hint text inside mat-form-field */
+mat-form-field .mat-hint {
+  font-size: 18px; /* Adjust the font size of the hint text as needed */
+}
+
+mat-slide-toggle {
+  color: #d6e9f1;
+}
+
+.menu-items button {
+  background-color: white;
+  color: black;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  background-color: #d6e9f1;
+  color: black;
+}
+
+
+
+

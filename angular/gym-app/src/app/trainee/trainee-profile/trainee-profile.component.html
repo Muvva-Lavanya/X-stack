@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="header">
+    <mat-toolbar>
+      <button class="example-icon" mat-icon-button>
+        <mat-icon>fitness_center</mat-icon>
+      </button>
+      <span>GYM-PORTAL</span>
+      <span class="spacer"></span>
+      <div class="menu-items">
+        <button (click)="viewTraining()" mat-raised-button routerLinkActive="active">My Trainings</button>&nbsp;&nbsp;&nbsp;
+        <button mat-raised-button routerLink="" routerLinkActive="active">Sign Out</button>
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </div>
+  <div class="trainee-profile">
+    <div class="my-profile">
+      <h4>Trainee Profile</h4>
+      <div class="pfp-status">
+        <div class="student-image"><img alt="student-image" height="100" src="../../../assets/images/trainee-profile.png" width="100">
+        </div>
+        <div class="student-status">
+          <h4>Status</h4>
+          <div *ngIf="traineeProfile.status==false; then inactive else active"></div>
+          <ng-template #active>
+            <h5>Active</h5>
+          </ng-template>
+          <ng-template #inactive>
+            <h5>InActive</h5>
+          </ng-template>
+        </div>
+      </div>
+      <div class="student-details">
+        <h3>First Name </h3>
+        <h5>{{traineeProfile.firstName}}</h5>
+        <h3>Last Name</h3>
+        <h5>{{traineeProfile.lastName}}</h5>
+        <h3>User Name</h3>
+        <h5>{{traineeProfile.userName}}</h5>
+        <h3>Date of Birth</h3>
+        <h5>{{traineeProfile.dateOfBirth | date}}</h5>
+        <h3>Address</h3>
+        <h5>{{traineeProfile.address}}</h5>
+        <h3>Email</h3>
+        <h5>{{traineeProfile.email}}</h5>
+        <div>
+          <button (click)="updateTrainee()" mat-raised-button>Edit profile</button>&nbsp;&nbsp;
+          <button (click)="updatePassword()" mat-raised-button>Change Password</button>
+          <br><br>
+        </div>
+      </div>
+    </div>
+    <div class="my-trainees">
+      <div class="my-trainees-header">
+        <h2>My Trainers</h2>
+        <button (click)="editTrainers()" color="primary" mat-raised-button>Add Trainer</button>
+      </div>
+      <div class="trainers-table">
+<!--        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">-->
+<!--          &lt;!&ndash; Position Column &ndash;&gt;-->
+<!--          <ng-container matColumnDef="name">-->
+<!--            <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>-->
+<!--            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>-->
+<!--          </ng-container>-->
+
+<!--          &lt;!&ndash; Name Column &ndash;&gt;-->
+<!--          <ng-container matColumnDef="specialization">-->
+<!--            <mat-header-cell *matHeaderCellDef> Specialization</mat-header-cell>-->
+<!--            <mat-cell *matCellDef="let element"> {{element.specialization}} </mat-cell>-->
+<!--          </ng-container>-->
+
+<!--          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>-->
+<!--          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>-->
+<!--        </mat-table>-->
+        <table class="mat-elevation-z8">
+          <thead>
+          <tr>
+            <th> Name</th>
+            <th> Specialization</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let element of dataSource">
+            <td>{{element.name}}</td>
+            <td>{{element.specialization}}</td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<app-homepage></app-homepage>
+<div class="container">
+    <div class="student-image">
+      <img alt="student-image" src="../../../assets/images/sign-in.jpg">
+    </div>
+    <div class="inside-content">
+      <div class="header">
+        <h3>Sign In</h3>
+        <h5>welcome back</h5>
+      </div>
+      <div class="login-form">
+        <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+          <mat-form-field>
+            <mat-icon class="my-icon" matPrefix>perm_identity</mat-icon>
+            <mat-label>Enter Username</mat-label>
+            <input formControlName="username" matInput name="username" type="text">
+            <mat-error *ngIf="loginForm.get('username').hasError('required')">
+              Username is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-icon class="my-icon" matPrefix>lock</mat-icon>
+            <mat-label>Enter Password</mat-label>
+            <input formControlName="password" matInput
+                   name="password"
+                   type="password">
+            <mat-error *ngIf="loginForm.get('password').hasError('required')">
+              Password is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-radio-group formControlName="userType"
+                           aria-label="Type of User">
+            <mat-radio-button value="trainee">Trainee</mat-radio-button>
+            <mat-radio-button value="trainer">Trainer</mat-radio-button>
+          </mat-radio-group>
+
+
+          <button [disabled]="loginForm.invalid" color="primary" mat-raised-button type="submit">SignIn</button>
+        </form>
+      </div>
+    </div>
+</div>
+

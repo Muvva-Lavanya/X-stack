@@ -1,0 +1,72 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  text-align: -moz-left;
+  margin-bottom: 20px;
+  margin-top: 50px;
+  margin-left: 400px;
+}
+
+h1 {
+  font-weight: bold;
+  color: black;
+  margin-bottom: 10px; /* Remove the default margin */
+}
+
+h3 {
+  font-weight: lighter;
+  color: grey;
+  margin: 0; /* Remove the default margin */
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.image img {
+  margin-top: 0px;
+  margin-left: 200px;
+  margin-right: 50px;
+  width: 550px; /* Set the width and height to the same value to create a square */
+  height: 400px;
+  object-fit: contain;
+}
+
+.registration-form {
+  margin-top: 10px;
+  width: 30px; /* Adjust the width as needed */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.registration-form mat-form-field {
+  width: 160%;
+  height: 70px;
+  color: blueviolet;
+  font-size: 14px;
+}
+
+.registration-form mat-icon {
+  color: #a5d8ee;
+}
+
+/* Optional: Style the button */
+.registration-form Button {
+  background-color: #d6e9f1;
+  color: black;
+  margin-top: 25px;
+  flex-grow: 1;
+  width: 160%; /* Expand to fill available horizontal space */
+
+}
+
+
+

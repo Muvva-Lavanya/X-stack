@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="toolbar">
+    <mat-toolbar>
+      <button class="example-icon" mat-icon-button>
+        <mat-icon>fitness_center</mat-icon>
+      </button>
+      <span>GYM-PORTAL</span>
+      <span class="spacer"></span>
+      <span class="spacer"></span>
+      <button (click)="backToProfile()" class="example-icon" mat-icon-button>
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <span>{{trainerProfile.userName}}</span>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </div>
+  <div class="header">
+    <h1>Training Registration</h1>
+    <h3>{{trainerProfile.userName}}</h3>
+  </div>
+  <div class="body">
+    <div class="image">
+      <img alt="Student Registration Image" src="../../../assets/images/training.png">
+    </div>
+    <div class="add-training">
+      <form (ngSubmit)="onSubmit()" [formGroup]="trainingForm">
+        <mat-form-field>
+          <mat-label>Select one Trainee</mat-label>
+          <mat-icon class="my-icon" matPrefix>perm_identity</mat-icon>
+          <mat-select formControlName="traineeUsername">
+            <mat-option *ngFor="let trainee of trainerProfile.traineesList" [value]="trainee.userName">
+              {{ trainee.userName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-icon class="my-icon" matPrefix>perm_identity</mat-icon>
+          <mat-label>Training Name</mat-label>
+          <input formControlName="trainingName" matInput name="trainingName" type="text">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-icon class="my-icon" matPrefix>fitness_center</mat-icon>
+          <mat-label>Training Type</mat-label>
+          <input matInput name="trainingType" readonly type="text" value="{{trainerProfile.specialization}}">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Date</mat-label>
+          <input [matDatepicker]="datePicker" formControlName="date" id="date" matInput name="date">
+          <mat-datepicker-toggle [for]="datePicker" matSuffix></mat-datepicker-toggle>
+          <mat-datepicker #datePicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-icon class="my-icon" matPrefix>access_time</mat-icon>
+          <mat-label>Duration</mat-label>
+          <input formControlName="duration" matInput name="duration" type="text">
+        </mat-form-field>
+        <button mat-raised-button type="submit" [disabled]="trainingForm.invalid">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

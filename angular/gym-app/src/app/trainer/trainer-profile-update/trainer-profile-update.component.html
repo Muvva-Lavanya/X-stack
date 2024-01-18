@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="toolbar">
+    <mat-toolbar>
+      <button class="example-icon" mat-icon-button>
+        <mat-icon>fitness_center</mat-icon>
+      </button>
+      <span>GYM-PORTAL</span>
+      <span class="spacer"></span>
+      <button (click)="backToProfile()" class="example-icon" mat-icon-button>
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <span>{{trainer.userName}}</span>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </div>
+  <div class="header">
+    <h1>Trainer Updation</h1>
+    <h3>{{trainer.userName}}</h3>
+  </div>
+  <div class="body">
+    <div class="image">
+      <img alt="Student Registration Image" src="../../../assets/images/trainer-sign-up.png">
+    </div>
+    <div class="registration-form">
+      <form (ngSubmit)="onSubmit()" [formGroup]="updationForm">
+        <mat-form-field>
+          <mat-icon class="my-icon" matPrefix>perm_identity</mat-icon>
+          <mat-label>Enter Firstname</mat-label>
+          <input formControlName="firstName" id="firstName" matInput name="firstName" type="text" required>
+          <mat-error *ngIf="updationForm.get('firstName').hasError('required')">
+            FirstName is required
+          </mat-error>
+          <mat-error *ngIf="updationForm.get('firstName').hasError('pattern')">
+            FirstName should only contain [a-z],[A-Z]
+          </mat-error>
+          <mat-error *ngIf="updationForm.get('firstName').hasError('minlength')">
+            Firstname should contain atleast 3 characters.
+          </mat-error>
+          <mat-error *ngIf="updationForm.get('firstName').hasError('maxlength')">
+            Firstname should not contain more than 15 characters.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-icon class="my-icon" matPrefix>perm_identity</mat-icon>
+          <mat-label>Enter Lastname</mat-label>
+          <input formControlName="lastName" id="lastName" matInput name="lastName" type="text" required>
+          <mat-error *ngIf="updationForm.get('lastName').hasError('required')">
+            FirstName is required
+          </mat-error>
+          <mat-error *ngIf="updationForm.get('lastName').hasError('pattern')">
+            FirstName should only contain [a-z],[A-Z]
+          </mat-error>
+          <mat-error *ngIf="updationForm.get('lastName').hasError('minlength')">
+            Firstname should contain atleast 3 characters.
+          </mat-error>
+          <mat-error *ngIf="updationForm.get('lastName').hasError('maxlength')">
+            Firstname should not contain more than 15 characters.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-icon class="my-icon" matPrefix>email</mat-icon>
+          <mat-label>Enter your email</mat-label>
+          <input formControlName="email" id="email" matInput name="email" type="email" required>
+          <mat-error *ngIf="updationForm.get('email').hasError('required')">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="updationForm.get('email').hasError('pattern')">
+            Email should be in the form of abc@gmail.com
+          </mat-error>
+        </mat-form-field>
+        <mat-slide-toggle formControlName="status">Status</mat-slide-toggle>
+        <button mat-raised-button type="submit" [disabled]="!updationForm.valid">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

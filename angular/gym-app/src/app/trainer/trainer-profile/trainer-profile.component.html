@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="header">
+    <mat-toolbar>
+      <button class="example-icon" mat-icon-button>
+        <mat-icon>fitbit</mat-icon>
+      </button>
+      <span>GYM-PORTAL</span>
+      <span class="spacer"></span>
+      <div class="menu-items">
+        <button (click)="addTraining()" mat-raised-button routerLinkActive="active" [disabled]="trainerProfile.status==false">Add Training</button>&nbsp;&nbsp;&nbsp;
+        <button (click)="viewTrainings()" mat-raised-button routerLinkActive="active">View Trainings</button>&nbsp;&nbsp;&nbsp;
+        <button mat-raised-button routerLink="" routerLinkActive="active">Sign Out</button>
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </div>
+  <div class="student-profile">
+    <div class="Trainer Profile">
+      <h4>Trainer Profile</h4>
+      <div class="pfp-status">
+        <div class="student-image"><img alt="student-image" height="100" src="../../../assets/images/trainer-profile.png" width="100">
+        </div>
+        <div class="student-status">
+          <h4>Status</h4>
+          <div *ngIf="trainerProfile.status==false; then inactive else active"></div>
+          <ng-template #active>
+            <h5>Active</h5>
+          </ng-template>
+          <ng-template #inactive>
+            <h5>InActive</h5>
+          </ng-template>
+        </div>
+      </div>
+      <div class="student-details">
+        <h3>First Name</h3>
+        <h5>{{trainerProfile.firstName}}</h5>
+        <h3>Last Name</h3>
+        <h5>{{trainerProfile.lastName}}</h5>
+        <h3>User Name</h3>
+        <h5>{{trainerProfile.userName}}</h5>
+        <h3>Specialization</h3>
+        <h5>{{trainerProfile.specialization}}</h5>
+        <h3>Email</h3>
+        <h5>{{trainerProfile.email}}</h5>
+        <div>
+          <button (click)="updateTrainer()" color="primary" mat-raised-button>Edit profile</button>&nbsp;&nbsp;
+          <button (click)="updatePassword()" color="accent" mat-raised-button>Change Password</button>
+        </div>
+      </div>
+    </div>
+    <div class="my-trainers">
+      <div class="my-trainers-header">
+        <h2>My Trainees</h2>
+      </div>
+      <div class="trainers-table">
+        <table class="mat-elevation-z8">
+          <thead>
+          <tr>
+            <th>Username</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let element of dataSource; let i = index">
+            <td>{{ element.username }}</td>
+            <td>{{ element.firstname }}</td>
+            <td>{{ element.lastname }}</td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
+
+
