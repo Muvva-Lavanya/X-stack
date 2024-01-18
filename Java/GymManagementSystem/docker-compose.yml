@@ -1,0 +1,120 @@
+version: "3.8"
+
+services:
+
+  eureka-server:
+    image: com.epam/eureka-server:0.0.1-SNAPSHOT
+    ports:
+      - "8761:8761"
+    networks:
+      - gymapp
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_APPLICATION_NAME: eureka-server
+      SPRING_PROFILES_ACTIVE: default
+
+  gymapplicationservice:
+    image: com.epam/gym-microservice:0.0.1-SNAPSHOT
+    ports:
+      - "8081:8081"
+    networks:
+      - gymapp
+    depends_on:
+      - eureka-server
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 20s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_APPLICATION_NAME: gym-application
+      SPRING_PROFILES_ACTIVE: default
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+
+  reportsservice:
+    image: com.epam/gym-report-microservice:0.0.1-SNAPSHOT
+    ports:
+      - "8082:8082"
+    networks:
+      - gymapp
+    depends_on:
+      - eureka-server
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 20s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_APPLICATION_NAME: training-report
+      SPRING_PROFILES_ACTIVE: default
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+
+  notificationservice:
+    image: com.epam/notification-microservice:0.0.1-SNAPSHOT
+    ports:
+      - "8083:8083"
+    networks:
+      - gymapp
+    depends_on:
+      - eureka-server
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 20s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_APPLICATION_NAME: notification-app
+      SPRING_PROFILES_ACTIVE: default
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+
+  authenticationservice:
+    image: com.epam/authentication-microservice:0.0.1-SNAPSHOT
+    ports:
+      - "8090:8090"
+    networks:
+      - gymapp
+    depends_on:
+      - eureka-server
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 20s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_APPLICATION_NAME: gym-authentication
+      SPRING_PROFILES_ACTIVE: default
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+
+  gatewayserver:
+    image: com.epam/gateway-server:0.0.1-SNAPSHOT
+    ports:
+      - "8084:8084"
+    networks:
+      - gymapp
+    depends_on:
+      - eureka-server
+      - gymapplicationservice
+      - reportsservice
+      - notificationservice
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 45s
+        max_attempts: 3
+        window: 180s
+    environment:
+      SPRING_APPLICATION_NAME: gateway-server
+      SPRING_PROFILES_ACTIVE: default
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+
+networks:
+  gymapp:
