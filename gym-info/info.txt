@@ -1,5 +1,5 @@
 Hello this a sample file.
 Demonstarting how github pull request works.
 
-Done
-This is how it works.
+Done successfully.
+done from other branch.
